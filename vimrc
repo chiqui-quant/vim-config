@@ -1,4 +1,5 @@
 " Custom Vim configuration
+let mapleader =","
 
 call plug#begin('~/.vim/autoload')
     Plug 'scrooloose/nerdtree' "navigate files in vim
@@ -14,6 +15,7 @@ set encoding=utf-8
 set number
 set wildmenu
 set t_vb=
+set linebreak " break lines without breaking words
 set autoindent
 set smartindent
 set expandtab
@@ -64,3 +66,23 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" Navigating with guides
+inoremap ;gui <++>
+inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+map <leader><leader> <Esc>/<++><Enter>"_cdl
+
+" Latex shortcuts
+autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
+
+
+
+" Markdown 
+autocmd FileType markdown inoremap ,bf \textbf{}<++><Esc>T{i
+
+
+" Latex setup for compiling and displaying pdf
+" Note, you need to install okular
+" Important, the file name should not have spaces in between
+map <C-c> :!pdflatex %<CR><CR>
+map <C-d> :! okular $(echo % \| sed 's/tex$/pdf/') & disown<CR><CR> 
